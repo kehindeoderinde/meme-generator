@@ -9,7 +9,6 @@ At a high-level, this program reads data from different file types (CSV, TXT, JS
 ## Built With
 
 * [Flask](https://github.com/pallets/flask): Simple web server interface
-* [Pandas](https://github.com/pandas-dev/pandas): Easy processing meme text from csv files
 * [Pillow](https://github.com/python-pillow/Pillow): Image processing to add text
 
 ## Getting Started
