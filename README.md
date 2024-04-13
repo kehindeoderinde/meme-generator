@@ -86,11 +86,11 @@ Each `ImageModel` has two properties `parent_dir` and `name` which is the filena
 # Meme Module
 This module exposes the `MemeEngine` class. The `MemeEngine` is intitialized by providing a destination folder for our memes to be saved in. 
 
-The `MemeEngine.make_meme()` method takes a few arguments returns a path to the created meme in the folder specified when initializing the `MemeEngine`. These parameters are:
-    1. `img` - An single `ImageModel` object to be used when creating the meme
-    2. `body` - A string which will be a body for the meme. There is a limit of 35 characters
-    3. `author` - A string which will indicate who the author of this meme's body is. There is a limit of 10 characters
-    4. `width` - (Optional) Width of generated meme image
+The `MemeEngine.make_meme()` method takes a few arguments returns a path to the created meme in the folder specified when initializing the `MemeEngine`. These parameters are:<br>
+1. `img` - An single `ImageModel` object to be used when creating the meme
+2. `body` - A string which will be a body for the meme. There is a limit of 35 characters
+3. `author` - A string which will indicate who the author of this meme's body is. There is a limit of 10 characters
+4. `width` - (Optional) Width of generated meme image
 
 
 
