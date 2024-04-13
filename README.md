@@ -90,7 +90,7 @@ The `MemeEngine.make_meme()` method takes a few arguments returns a path to the 
 1. `img` - An single `ImageModel` object to be used when creating the meme
 2. `body` - A string which will be a body for the meme. There is a limit of 35 characters
 3. `author` - A string which will indicate who the author of this meme's body is. There is a limit of 10 characters
-4. `width` - (Optional) Width of generated meme image
+4. `width` - (Optional) Width of generated meme image. Default is 500px
 
 
 
