@@ -27,7 +27,8 @@ To get a local copy up and running follow these simple steps.
 ##Installation
 
 1. Make sure Python is installed on local system.
-2. `pdftotext` binary is required and can be installed...
+2. Clone repository from https://github.com/kehindeoderinde/meme-generator.git
+3. `pdftotext` binary is required and can be installed...
 * On Mac using Homebrew
   ```sh
   brew install pkg-config poppler python
@@ -38,7 +39,7 @@ To get a local copy up and running follow these simple steps.
     ```sh
     conda install -c conda-forge poppler
     ```
-3. Install python dependencies
+4. Install python dependencies
    ```sh
    pip install -r requirements.txt
    ```
