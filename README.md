@@ -62,7 +62,7 @@ Or run the default options **```python main.py```** to create a meme in ```./tmp
 Starting dev server
 ```sh
 $ flask run
- * Serving Flask app 'app' (lazy loading)
+ * Serving Flask app
  * Environment: production
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
@@ -70,6 +70,30 @@ $ flask run
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 Once started(using the default port) go to http://127.0.0.1:5000/
+
+## Modules
+
+# Quote Module
+This module exposes the `Ingestor` and `QuoteModel` classes. The `Ingestor.parse()` takes in a file path of different file types (CSV, TXT, JSON, PDF) and reads data from them to return a List of `QuoteModel` objects.
+
+Each `QuoteModel` has two properties `body` and `author`.
+
+# Image Module
+This module exposes the `ImageEngine` and `ImageModel` classes. The `Ingestor.retrieve_imgs()` takes in a folder path and identifies all images in .JPG or PNG format to return a List of `ImageModel` objects.
+
+Each `ImageModel` has two properties `parent_dir` and `name` which is the filename and its extension.
+
+# Meme Module
+This module exposes the `MemeEngine` class. The `MemeEngine` is intitialized by providing a destination folder for our memes to be saved in. 
+
+The `MemeEngine.make_meme()` method takes a few arguments returns a path to the created meme in the folder specified when initializing the `MemeEngine`. These parameters are:
+    * `img` - An single `ImageModel` object to be used when creating the meme
+    * `body` - A string which will be a body for the meme. There is a limit of 35 characters
+    * `author` - A string which will indicate who the author of this meme's body is. There is a limit of 10 characters
+    * `width` - (Optional) Width of generated meme image
+
+
+
 
 
 
