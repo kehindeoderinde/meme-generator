@@ -46,8 +46,8 @@ To get a local copy up and running follow these simple steps.
 ## Using the CLI
 
 ```sh
-$ python main.py --help
-usage: main.py [-h] [-p PATH] [-b BODY] [-a AUTHOR]
+$ python meme.py --help
+usage: meme.py [-h] [-p PATH] [-b BODY] [-a AUTHOR]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -56,7 +56,7 @@ optional arguments:
   -a AUTHOR, --author AUTHOR
                         Author name written to image.
 ```
-Or run the default options **```python main.py```** to create a meme in ```./tmp```
+Or run the default options **```python meme.py```** to create a meme in ```./tmp```
 
 ## Using the Flask app
 Starting dev server
