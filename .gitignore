@@ -1,3 +1,4 @@
 tmp/
 static/
 */__pycache__/
+.venv
