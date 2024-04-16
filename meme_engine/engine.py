@@ -44,9 +44,9 @@ class MemeEngine:
             print(img.size)
             img_width = img.size[0]
             img_height = img.size[1]
-            width_diff_pcnt = (width/float(img_width))
-            height_size = int((float(img_height)*float(width_diff_pcnt)))
-            res = img.resize((width,height_size))
+            width_diff_pcnt = width / float(img_width)
+            height_size = int((float(img_height) * float(width_diff_pcnt)))
+            res = img.resize((width, height_size))
         except Exception:
             print("Error resizing image provided to meme engine")
         else:
@@ -59,17 +59,17 @@ class MemeEngine:
         print(text)
         start_x = img.size[0] * 0.2
         start_y = img.size[1] * 0.2
-        
+
         end_x = img.size[0] * 0.8
         end_y = img.size[1] * 0.8
-        
+
         x = random.randint(start_x, end_x)
         y = random.randint(start_y, end_y)
-        
+
         draw = ImageDraw.Draw(img)
-        
+
         draw.multiline_text()
-        
+
         # draw.multiline_text(
         #     (7.5, 450), f'"{body}" - {author}',
         #     align="center", font_size=22
@@ -83,7 +83,7 @@ class MemeEngine:
         parsed_img = self.read(img)
 
         resized_img = self.resize(parsed_img, width=width)
-        
+
         self.add_text(img=resized_img, body=body, author=author)
 
         # try:
