@@ -2,7 +2,7 @@
 
 import os
 import random
-import textwrap
+from textwrap import wrap
 from PIL import Image, ImageDraw
 from image_engine import ImageModel
 
@@ -41,7 +41,6 @@ class MemeEngine:
     def resize(self, img: Image.Image, width: int) -> Image.Image:
         """Resize image to be used for meme"""
         try:
-            print(img.size)
             img_width = img.size[0]
             img_height = img.size[1]
             width_diff_pcnt = width / float(img_width)
@@ -54,28 +53,61 @@ class MemeEngine:
 
     def add_text(self, img: Image.Image, body: str, author: str):
         """Add text to resized meme image"""
-        wrapper = textwrap.TextWrapper(width=50)
-        text = wrapper.fill(f'"{body}" - {author}')
-        print(text)
-        start_x = img.size[0] * 0.2
-        start_y = img.size[1] * 0.2
+        # Adding bounds to where text can be in \
+        # image so it does not run out of bounds
+        start_x, end_x = int(img.size[0] * 0.1), int(img.size[0] * 0.9)
+        start_y, end_y = int(img.size[1] * 0.1), int(img.size[1] * 0.9)
 
-        end_x = img.size[0] * 0.8
-        end_y = img.size[1] * 0.8
+        # Create meme text
+        text = f'"{body}" - {author}'
 
-        x = random.randint(start_x, end_x)
-        y = random.randint(start_y, end_y)
-
+        # Set up to draw text on Image
         draw = ImageDraw.Draw(img)
 
-        draw.multiline_text()
+        # Determine starting point for text wrap
+        start_point_width = random.randint(start_x, end_x)
+        wrap_width = int(end_x - start_point_width)
 
-        # draw.multiline_text(
-        #     (7.5, 450), f'"{body}" - {author}',
-        #     align="center", font_size=22
-        # )
-        img.show()
-        # return img
+        # Check if width for text is sufficient
+        while start_point_width > end_x / 4:
+            start_point_width = random.randint(start_x, end_x)
+            wrap_width = int(end_x - start_point_width)
+
+        # Wrap meme text
+        wrapper = wrap(text=text, width=30)
+
+        # Check if height for text is allowed
+        start_point_height = random.randint(start_y, end_y)
+        wrap_height = int(end_y - start_point_height)
+
+        while (len(wrapper) * 30) + start_point_height > end_y:
+            start_point_height = random.randint(start_y, end_y)
+            wrap_height = int(end_y - start_point_height)
+
+        for line in wrapper:
+            draw.text(
+                xy=(start_point_width, start_point_height),
+                text=line.upper(),
+                align="center",
+                font_size=22,
+            )
+            start_point_height += 30
+
+        # img.show()
+        return img
+
+    def save_to_location(self, img: Image.Image) -> str:
+        """Save image to location with random name"""
+        try:
+            save_path = f"{self.root_path}/meme_{random.randrange(100)}.jpg"
+            img.save(save_path)
+        except Exception:
+            print(
+                f"An error occured while saving image at \
+                {save_path}"
+            )
+        else:
+            return save_path
 
     def make_meme(self, img: ImageModel, body: str, author: str, width=500):
         """This generates a new meme with arguments provided"""
@@ -84,16 +116,8 @@ class MemeEngine:
 
         resized_img = self.resize(parsed_img, width=width)
 
-        self.add_text(img=resized_img, body=body, author=author)
+        meme = self.add_text(img=resized_img, body=body, author=author)
 
-        # try:
-        #     save_path = f"{self.root_path}/meme_{random.randrange(100)}\
-        #         .jpg"
-        #     img.save(save_path)
-        # except Exception:
-        #     print(
-        #         f"An error occured while saving image at \
-        #         {save_path}"
-        #     )
-        # else:
-        #     return save_path
+        meme_path = self.save_to_location(meme)
+
+        return meme_path
