@@ -1,4 +1,4 @@
-""" Abstract class module """
+"""Abstract class module."""
 
 from abc import ABC, abstractmethod
 from typing import List
@@ -11,25 +11,25 @@ from .model import QuoteModel
 
 
 class IngestorInterface(ABC):
-    """Check if data can be ingested"""
+    """Check if data can be ingested."""
 
     @classmethod
     @abstractmethod
     def can_ingest(cls, filepath: str) -> bool:
-        """Check if file is ingestible"""
+        """Check if file is ingestible."""
 
     @classmethod
     @abstractmethod
     def parse(cls, filepath: str) -> List[QuoteModel]:
-        """Return list of quotes from file"""
+        """Return list of quotes from file."""
 
 
 class TextIngestor(IngestorInterface):
-    """Ingests TXT using base abstract interface"""
+    """Ingest TXT using base abstract interface."""
 
     @classmethod
     def can_ingest(cls, filepath: str) -> bool:
-        """Check if file is ingestible"""
+        """Check if file is ingestible."""
         file_extension = Path(filepath).suffix
         if file_extension != ".txt":
             return False
@@ -37,7 +37,7 @@ class TextIngestor(IngestorInterface):
 
     @classmethod
     def parse(cls, filepath: str) -> List[QuoteModel]:
-        """Return list of quotes from TXT file"""
+        """Return list of quotes from TXT file."""
         quotes = []
         with open(filepath, mode="r", encoding="utf-8") as infile:
             for line in infile.readlines():
@@ -49,11 +49,11 @@ class TextIngestor(IngestorInterface):
 
 
 class CSVIngestor(IngestorInterface):
-    """Ingests CSV using base abstract interface"""
+    """Ingest CSV using base abstract interface."""
 
     @classmethod
     def can_ingest(cls, filepath: str) -> bool:
-        """Check if file is ingestible"""
+        """Check if file is ingestible."""
         file_extension = Path(filepath).suffix
         if file_extension != ".csv":
             return False
@@ -61,7 +61,7 @@ class CSVIngestor(IngestorInterface):
 
     @classmethod
     def parse(cls, filepath: str) -> List[QuoteModel]:
-        """Return list of quotes from CSV file"""
+        """Return list of quotes from CSV file."""
         quotes = []
         with open(filepath, mode="r", encoding="utf-8") as infile:
             reader = csv.reader(infile)
@@ -73,11 +73,11 @@ class CSVIngestor(IngestorInterface):
 
 
 class PDFIngestor(IngestorInterface):
-    """Ingests PDF using base abstract interface"""
+    """Ingest PDF using base abstract interface."""
 
     @classmethod
     def can_ingest(cls, filepath: str) -> bool:
-        """Check if file is ingestible"""
+        """Check if file is ingestible."""
         file_extension = Path(filepath).suffix
         if file_extension != ".pdf":
             return False
@@ -85,7 +85,7 @@ class PDFIngestor(IngestorInterface):
 
     @classmethod
     def parse(cls, filepath: str) -> List[QuoteModel]:
-        """Return list of quotes from PDFfile"""
+        """Return list of quotes from PDFfile."""
         quotes = []
         tmp_filepath = "tmp.txt"
 
@@ -114,11 +114,11 @@ class PDFIngestor(IngestorInterface):
 
 
 class DocxIngestor(IngestorInterface):
-    """Ingests DOCX using base abstract interface"""
+    """Ingests DOCX using base abstract interface."""
 
     @classmethod
     def can_ingest(cls, filepath: str) -> bool:
-        """Check if file is ingestible"""
+        """Check if file is ingestible."""
         file_extension = Path(filepath).suffix
         if file_extension != ".docx":
             return False
@@ -126,18 +126,17 @@ class DocxIngestor(IngestorInterface):
 
     @classmethod
     def parse(cls, filepath: str) -> List[QuoteModel]:
-        """Return list of quotes from DOCXfile"""
+        """Return list of quotes from DOCXfile."""
         with open(filepath, mode="rb") as infile:
             quotes = []
             document = Document(infile)
             for paragraph in document.paragraphs:
                 if (
-                    len(str(paragraph.text).replace('"', "")
-                        .strip("").split(" - ")) == 2
+                    len(str(paragraph.text).replace('"', "").strip("").split(" - "))
+                    == 2
                 ):
                     body, author = (
-                        str(paragraph.text).replace('"', "")
-                        .strip("").split(" - ")
+                        str(paragraph.text).replace('"', "").strip("").split(" - ")
                     )
                     quotes.append(QuoteModel(body, author))
 
@@ -145,11 +144,11 @@ class DocxIngestor(IngestorInterface):
 
 
 class Ingestor:
-    """Ingestor class that selects right ingestor based on file path"""
+    """Ingestor class that selects right ingestor based on file path."""
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
-        """Parse and return retrieved quotes from file"""
+        """Parse and return retrieved quotes from file."""
         quotes = []
         if TextIngestor.can_ingest(path):
             quotes.extend(TextIngestor.parse(path))

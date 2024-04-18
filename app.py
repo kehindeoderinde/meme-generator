@@ -1,4 +1,4 @@
-"""FLASK APPLICATION"""
+"""FLASK APPLICATION."""
 
 import json
 import random
@@ -21,8 +21,7 @@ meme = MemeEngine(SAVE_PATH)
 
 
 def setup():
-    """Load all resources"""
-
+    """Load all resources."""
     quote_files = [
         "./_data/DogQuotes/DogQuotesTXT.txt",
         "./_data/DogQuotes/DogQuotesDOCX.docx",
@@ -53,8 +52,7 @@ quotes, imgs = setup()
 
 @app.route("/")
 def meme_rand():
-    """Generate a random meme"""
-
+    """Generate a random meme."""
     # @TODO:
     # Use the random python standard library class to:
     # 1. select a random image from imgs array
@@ -67,14 +65,13 @@ def meme_rand():
 
 @app.route("/create", methods=["GET"])
 def meme_form():
-    """User input for meme information"""
+    """User input for meme information."""
     return render_template("meme_form.html")
 
 
 @app.route("/create", methods=["POST"])
 def meme_post():
-    """Create a user defined meme"""
-
+    """Create a user defined meme."""
     # @TODO:
     # 1. Use requests to save the image from the image_url
     #    form param to a temp local file.

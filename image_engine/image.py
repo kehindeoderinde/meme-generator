@@ -1,4 +1,4 @@
-"""Store images models for use"""
+"""Store images models for use."""
 
 import os
 from pathlib import Path
@@ -7,14 +7,13 @@ from .model import ImageModel
 
 
 class ImageEngine:
-    """Image engine"""
+    """Image engine."""
 
     IMG_TYPES_ALLOWED = set([".png", ".jpg"])
 
     @classmethod
     def retrieve_imgs(cls, src_path: str) -> List[ImageModel]:
-        """Retrieve all imgs in a directory"""
-
+        """Retrieve all imgs in a directory."""
         all_files = []
         for root_dir, _, files in os.walk(src_path):
             all_files.extend([

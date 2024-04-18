@@ -1,4 +1,4 @@
-"""MEME GENERATOR CLI APPLICATION"""
+"""MEME GENERATOR CLI APPLICATION."""
 
 from pathlib import Path
 import random
@@ -16,7 +16,7 @@ QUOTE_AUTHOR_LIMIT = 10
 
 
 def generate_meme(path=None, body=None, author=None):
-    """Generate a meme given an path and a quote"""
+    """Generate a meme given an path and a quote."""
     img = None
     quote = None
 

@@ -1,4 +1,4 @@
-""" Meme engine module """
+"""Meme engine module."""
 
 import os
 import random
@@ -8,10 +8,11 @@ from image_engine import ImageModel
 
 
 class MemeEngine:
-    """Generate me from Image and Quote"""
+    """Generate me from Image and Quote."""
 
     def __init__(self, output_dir: str):
         # Check if out dir provided exists, if not create it
+        """Initialize Meme Engine class."""
         if os.path.exists(output_dir) and os.path.isdir(output_dir):
             self.root_path = output_dir
         else:
@@ -30,7 +31,7 @@ class MemeEngine:
                 self.root_path = output_dir
 
     def read(self, img: ImageModel) -> Image.Image:
-        """Read image from Image Model"""
+        """Read image from Image Model."""
         try:
             res = Image.open(f"{img.parent_dir}/{img.name}")
         except Exception:
@@ -39,7 +40,7 @@ class MemeEngine:
             return res
 
     def resize(self, img: Image.Image, width: int) -> Image.Image:
-        """Resize image to be used for meme"""
+        """Resize image to be used for meme."""
         try:
             img_width = img.size[0]
             img_height = img.size[1]
@@ -52,7 +53,7 @@ class MemeEngine:
             return res
 
     def add_text(self, img: Image.Image, body: str, author: str):
-        """Add text to resized meme image"""
+        """Add text to resized meme image."""
         # Adding bounds to where text can be in \
         # image so it does not run out of bounds
         start_x, end_x = int(img.size[0] * 0.1), int(img.size[0] * 0.9)
@@ -97,7 +98,7 @@ class MemeEngine:
         return img
 
     def save_to_location(self, img: Image.Image) -> str:
-        """Save image to location with random name"""
+        """Save image to location with random name."""
         try:
             save_path = f"{self.root_path}/meme_{random.randrange(100)}.jpg"
             img.save(save_path)
@@ -109,9 +110,8 @@ class MemeEngine:
         else:
             return save_path
 
-    def make_meme(self, img: ImageModel, body: str, author: str, width=500):
-        """This generates a new meme with arguments provided"""
-
+    def make_meme(self, img: ImageModel, body: str, author: str, width=500) -> str:
+        """Generate a new meme with arguments provided."""
         parsed_img = self.read(img)
 
         resized_img = self.resize(parsed_img, width=width)
